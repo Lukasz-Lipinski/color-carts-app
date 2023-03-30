@@ -25,11 +25,14 @@ app.use(
   bodyparser.json()
 );
 
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    msg: 'hello world!',
-  });
-});
+app.get(
+  '/test',
+  (req: Request, res: Response) => {
+    res.json({
+      msg: 'hello world!',
+    });
+  }
+);
 
 app.use('/', (req: Request, res: Response) => {
   res.sendFile(
