@@ -18,6 +18,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'account',
+    loadComponent: () =>
+      import(
+        './pages/account/account.component'
+      ).then((m) => m.AccountComponent),
+  },
+  {
     path: 'registration',
     loadComponent: () =>
       import(

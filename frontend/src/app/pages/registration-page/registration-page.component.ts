@@ -6,7 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   templateUrl:
     './registration-page.component.html',
   styleUrls: [
-    './registration-page.component.sass',
+    './registration-page.component.scss',
   ],
   standalone: true,
   imports: [SharedModule],

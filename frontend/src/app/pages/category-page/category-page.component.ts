@@ -5,7 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'app-category-page',
   templateUrl: './category-page.component.html',
-  styleUrls: ['./category-page.component.sass'],
+  styleUrls: ['./category-page.component.scss'],
   standalone: true,
   imports: [SharedModule],
 })
