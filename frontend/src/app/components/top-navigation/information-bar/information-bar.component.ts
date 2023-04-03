@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { Observable, map, of } from 'rxjs';
+import { CartService } from 'src/app/pages/cart/cart.service';
 
 interface Icon {
   label: string;
@@ -11,11 +17,13 @@ interface Icon {
   selector: 'app-information-bar',
   templateUrl: './information-bar.component.html',
   styleUrls: ['./information-bar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InformationBarComponent
   implements OnInit
 {
-  icons: Array<Icon> = [
+  price$!: Observable<number>;
+  private icons: Array<Icon> = [
     {
       img: 'bi-phone',
       label: '111-111-111',
@@ -35,7 +43,13 @@ export class InformationBarComponent
     },
   ];
 
-  constructor() {}
+  constructor(private carService: CartService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.price$ = this.carService.getPrice();
+  }
+
+  getIcons() {
+    return this.icons;
+  }
 }

@@ -6,6 +6,7 @@ import path from 'path';
 import bodyparser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import ProductRoutes from './routes/products';
 
 const app = express();
 const port = process.env.PORT || '5000';
@@ -24,6 +25,8 @@ app.use(
   bodyparser.urlencoded({ extended: true }),
   bodyparser.json()
 );
+
+app.use('/products', ProductRoutes);
 
 app.get(
   '/test',

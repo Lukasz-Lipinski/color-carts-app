@@ -1,0 +1,18 @@
+<div
+  class="custom-border-bottom d-flex align-items-center py-2"
+  [ngClass]="style.selected ? 'shadow-lg' : ''"
+>
+  <div class="col-4 d-flex justify-content-end">
+    <span class="bi bi-search"></span>
+  </div>
+  <div
+    class="col"
+    (click)="onSelect()"
+  >
+    <input
+      type="search"
+      class="searcher-control"
+      placeholder="Szukaj..."
+    />
+  </div>
+</div>
