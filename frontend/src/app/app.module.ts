@@ -10,6 +10,7 @@ import { TopNavigationComponent } from './components/top-navigation/top-navigati
 import { InformationBarComponent } from './components/top-navigation/information-bar/information-bar.component';
 import { SearcherComponent } from './components/searcher/searcher.component';
 import { MiddlePartComponent } from './components/top-navigation/middle-part/middle-part.component';
+import { LogoComponent } from './components/logo/logo.component';
 
 const components = [
   NavigationComponent,
@@ -17,6 +18,7 @@ const components = [
   InformationBarComponent,
   SearcherComponent,
   MiddlePartComponent,
+  LogoComponent,
 ];
 
 @NgModule({

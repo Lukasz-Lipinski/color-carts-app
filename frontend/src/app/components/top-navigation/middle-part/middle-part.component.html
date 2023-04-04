@@ -1,10 +1,25 @@
 <section
   class="container d-flex justify-content-between"
 >
-  <app-searcher></app-searcher>
-  <p>Logo</p>
+  <app-searcher
+    (emitParametersForSearcher)="onShow($event)"
+  ></app-searcher>
+  <app-logo></app-logo>
+
   <div class="d-flex gap-4">
-    <span class="bi bi-person"></span>
-    <span class="bi bi-cart"></span>
+    <a
+      routerLink="account"
+      class="d-flex flex-column align-items-center link-dark custom-link"
+    >
+      <span class="fs-4 bi bi-person"></span>
+      <span>Moje konto</span>
+    </a>
+    <a
+      routerLink="cart"
+      class="d-flex flex-column align-items-center custom-link link-dark"
+    >
+      <span class="fs-4 bi bi-cart"></span>
+      <span>Koszyk</span>
+    </a>
   </div>
 </section>

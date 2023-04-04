@@ -1,0 +1,7 @@
+@import '../../shared/customStyles.scss';
+
+@include logoAnimation();
+
+.logo {
+  font-family: cursive;
+}

@@ -3,13 +3,16 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-middle-part',
   templateUrl: './middle-part.component.html',
-  styleUrls: ['./middle-part.component.scss']
+  styleUrls: ['./middle-part.component.scss'],
 })
-export class MiddlePartComponent implements OnInit {
+export class MiddlePartComponent
+  implements OnInit
+{
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  onShow(parameter: string) {
+    console.log(parameter);
   }
-
 }

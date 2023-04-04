@@ -1,8 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   OnInit,
+  Output,
 } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
+
+interface SearcherFormProps {
+  searcher: FormControl<string>;
+}
 
 @Component({
   selector: 'app-searcher',
@@ -11,17 +23,26 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearcherComponent implements OnInit {
-  style = {
-    selected: false,
-  };
+  @Output() emitParametersForSearcher =
+    new EventEmitter<string>();
+  searcherForm!: FormGroup<SearcherFormProps>;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searcherForm = new FormGroup({
+      searcher: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+    });
+  }
 
-  onSelect() {
-    this.style = {
-      selected: !this.style.selected,
-    };
-    console.log(this.style);
+  onSubmit() {
+    this.searcherForm.valid &&
+      this.emitParametersForSearcher.emit(
+        this.searcherForm.controls['searcher']
+          .value
+      );
   }
 }
