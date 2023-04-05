@@ -1,0 +1,23 @@
+ul {
+  font-size: 0.8rem;
+}
+
+.mainBar {
+  a {
+    padding: 0.6rem;
+    transition: 0.2s background-color;
+
+    &:hover {
+      transition: 0.2s background-color;
+      background-color: hsl(220, 50%, 88%);
+    }
+
+    &.selected-link {
+      background-color: hsl(220, 50%, 88%);
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}

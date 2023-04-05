@@ -11,6 +11,7 @@ import { InformationBarComponent } from './components/top-navigation/information
 import { SearcherComponent } from './components/searcher/searcher.component';
 import { MiddlePartComponent } from './components/top-navigation/middle-part/middle-part.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const components = [
   NavigationComponent,
@@ -19,6 +20,7 @@ const components = [
   SearcherComponent,
   MiddlePartComponent,
   LogoComponent,
+  AuthComponent,
 ];
 
 @NgModule({

@@ -37,13 +37,21 @@ const routes: Routes = [
       import(
         './pages/category-page/category-page.component'
       ).then((m) => m.CategoryPageComponent),
+    children: [
+      {
+        path: ':subcategory',
+        loadComponent: () =>
+          import(
+            './pages/category-page/category-page.component'
+          ).then((m) => m.CategoryPageComponent),
+      },
+    ],
   },
   {
     path: '**',
     redirectTo: '',
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

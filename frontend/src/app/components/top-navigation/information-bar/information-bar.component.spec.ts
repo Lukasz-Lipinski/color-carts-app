@@ -106,7 +106,7 @@ describe('Testing Information Bar Component', () => {
         deliveryInfo.textContent
           ?.trim()
           .toLowerCase()
-      ).toEqual('szybka dostawa');
+      ).toEqual('fast delivery');
     });
   });
 });
