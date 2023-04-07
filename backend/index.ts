@@ -7,6 +7,7 @@ import bodyparser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import ProductRoutes from './routes/products';
+import UserRoutes from './routes/users';
 
 const app = express();
 const port = process.env.PORT || '5000';
@@ -27,6 +28,7 @@ app.use(
 );
 
 app.use('/products', ProductRoutes);
+app.use('/users', UserRoutes);
 
 app.get(
   '/test',
@@ -47,5 +49,5 @@ app.use('/', (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-  console.log('This app is running on' + port);
+  console.log('This app is running on ' + port);
 });

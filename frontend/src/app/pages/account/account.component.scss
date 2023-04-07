@@ -1,0 +1,10 @@
+.link {
+  font-size: 0.9rem;
+  color: hsl(0, 0%, 70%);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: hsl(0, 0%, 55%);
+  }
+}

@@ -1,4 +1,9 @@
+import { of } from 'rxjs';
 import { Product } from '../pages/cart/cart.service';
+import {
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 export const mockedProducts: Product[] = [
   {
@@ -28,3 +33,18 @@ export const mockedProducts: Product[] = [
     price: 23,
   },
 ];
+
+export const mockedInputStream$ = of(
+  new FormControl('mocked input stream', [
+    Validators.required,
+  ])
+);
+
+export const wrongMockedInputStream$ = of(
+  new FormControl('', [Validators.required])
+);
+
+export const mockedInput = new FormControl(
+  'mocked input',
+  [Validators.required]
+);

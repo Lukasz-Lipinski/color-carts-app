@@ -1,0 +1,11 @@
+<div
+  *ngIf="
+    (control$ | async)?.invalid &&
+    (control$ | async)?.dirty
+  "
+  class="alert alert-danger mt-3"
+>
+  <span>{{
+    setErrorMsg((control$ | async)!)
+  }}</span>
+</div>

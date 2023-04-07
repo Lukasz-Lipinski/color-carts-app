@@ -1,43 +1,43 @@
-<div class="container">
-  <ul class="list-unstyled mainBar d-flex">
-    <li
-      *ngFor="let link of links; let i = index"
-      (mouseenter)="onSetSubcategory(i)"
+<ul
+  class="list-unstyled mainBar d-flex container"
+>
+  <li
+    *ngFor="let link of links; let i = index"
+    (mouseenter)="onSetSubcategory(i)"
+  >
+    <a
+      [routerLink]="link.label"
+      routerLinkActive="selected-link"
+      [routerLinkActiveOptions]="{
+        exact: true
+      }"
+      class="py-3 text-black"
     >
-      <a
-        [routerLink]="link.label"
-        routerLinkActive="selected-link"
-        [routerLinkActiveOptions]="{
-          exact: true
-        }"
-        class="py-3 text-black"
-      >
-        {{ link.label | uppercase }}
-        <span
-          *ngIf="link?.subcategory"
-          class="bi bi-arrow-down"
-        ></span>
+      {{ link.label | uppercase }}
+      <span
+        *ngIf="link?.subcategory"
+        class="bi bi-arrow-down"
+      ></span>
+    </a>
+  </li>
+</ul>
+<div
+  *ngIf="
+    links[subcategory.index].subcategory?.length
+  "
+  (mouseleave)="onSetSubcategory(0)"
+  class="position-absolute bg-white d-flex w-100 shadow p-5 justify-content-center"
+>
+  <ul class="d-flex list-unstyled gap-4">
+    <li
+      *ngFor="
+        let sub of links[subcategory.index]
+          .subcategory
+      "
+    >
+      <a [routerLink]="['/category', sub]">
+        {{ sub | uppercase }}
       </a>
     </li>
   </ul>
-  <div
-    *ngIf="
-      links[subcategory.index].subcategory?.length
-    "
-    (mouseleave)="onSetSubcategory(0)"
-    class="position-absolute bg-white d-flex w-100 shadow p-5 justify-content-center"
-  >
-    <ul class="d-flex list-unstyled gap-4">
-      <li
-        *ngFor="
-          let sub of links[subcategory.index]
-            .subcategory
-        "
-      >
-        <a [routerLink]="['/category', sub]">
-          {{ sub | uppercase }}
-        </a>
-      </li>
-    </ul>
-  </div>
 </div>

@@ -1,0 +1,39 @@
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  class="container px-3"
+>
+  <h3 class="h3 text-center pb-3">Sign in</h3>
+  <div
+    *ngFor="let control of controls"
+    class="pb-4"
+  >
+    <label
+      class="form-label"
+      [for]="control.name"
+      >{{ control.name | uppercase }}</label
+    >
+    <input
+      [type]="control.type"
+      [id]="control.name"
+      class="form-control"
+      [formControlName]="control.name"
+    />
+
+    <app-error-message
+      [control$]="setControl(control.name)"
+    ></app-error-message>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-lg mt-4 py-2 px-5 w-50"
+    [ngClass]="
+      disable()
+        ? 'btn-outline-danger'
+        : 'btn-outline-primary'
+    "
+    [disabled]="disable()"
+  >
+    Login
+  </button>
+</form>
