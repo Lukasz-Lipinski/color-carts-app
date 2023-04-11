@@ -1,0 +1,35 @@
+<div class="row py-5">
+  <a
+    routerLink="/"
+    class="link"
+    >HOME PAGE</a
+  >
+</div>
+<div class="row">
+  <app-login-form class="col-6"></app-login-form>
+  <div class="col-6">
+    <div>
+      <h3 class="h3 text-center">Sign up</h3>
+      <p class="text-center">
+        You will gain extra benefits
+      </p>
+      <div
+        class="d-flex flex-column align-items-start"
+      >
+        <ul class="container">
+          <li
+            class="py-1"
+            *ngFor="let benefit of benefits"
+          >
+            {{ benefit }}
+          </li>
+        </ul>
+        <a
+          [routerLink]="['register']"
+          class="btn btn-lg px-5 btn-outline-primary"
+          >Create an account</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,7 @@ export interface User {
   name: string;
   surname: string;
   email: string;
+  isLogged: boolean;
   address?: {
     city: string;
     postcode: string;
@@ -42,6 +43,7 @@ export class AuthService {
     name: '',
     surname: '',
     email: '',
+    isLogged: false,
   });
 
   constructor(
@@ -67,6 +69,7 @@ export class AuthService {
       email: '',
       name: '',
       surname: '',
+      isLogged: false,
     });
   }
 }

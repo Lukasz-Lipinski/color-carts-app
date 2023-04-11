@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { AuthService } from 'src/app/components/auth/auth.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
