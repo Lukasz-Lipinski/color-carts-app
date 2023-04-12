@@ -14,7 +14,7 @@ import {
 } from '@angular/forms';
 import { of } from 'rxjs';
 
-interface Control {
+export interface Control {
   name: string;
   type: 'email' | 'password';
 }
@@ -25,7 +25,7 @@ interface LoginForm {
   [key: string]: FormControl<any>;
 }
 
-interface Credentials {
+export interface Credentials {
   email: string;
   password: string;
 }

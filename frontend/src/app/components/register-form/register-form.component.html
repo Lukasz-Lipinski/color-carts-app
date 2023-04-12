@@ -1,0 +1,30 @@
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="onRegister()"
+  class="w-50"
+>
+  <div *ngFor="let control of controls">
+    <label
+      [for]="control.name"
+      class=""
+    >
+      {{ control.name | uppercase }}
+    </label>
+    <input
+      [id]="control.name"
+      [type]="control.type"
+      class="form-control"
+      [formControlName]="control.name"
+    />
+  </div>
+  <div
+    class="d-flex flex-column align-items-stretch"
+  >
+    <button
+      type="submit"
+      class="btn btn-outline-primary btn-lg mt-4"
+    >
+      Create an account
+    </button>
+  </div>
+</form>

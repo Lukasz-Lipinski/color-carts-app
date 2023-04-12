@@ -6,8 +6,11 @@ import {
 import {
   BehaviorSubject,
   Observable,
+  catchError,
+  of,
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Credentials } from '../login-form/login-form.component';
 
 export interface User {
   name: string;
@@ -24,7 +27,6 @@ export interface User {
 
 interface Error {
   msg: string;
-  status: number;
 }
 
 interface Response {
@@ -35,9 +37,7 @@ interface Response {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly url = isDevMode()
-    ? environment.BACKEND_API
-    : process.cwd();
+  private readonly url = environment.BACKEND_API;
 
   user = new BehaviorSubject<User>({
     name: '',
@@ -50,18 +50,26 @@ export class AuthService {
     private readonly http: HttpClient
   ) {}
 
-  register(user: User): Observable<Response> {
+  register(
+    user: Credentials
+  ): Observable<Response> {
     return this.http.post<Response>(
-      this.url + 'users/register',
+      this.url + '/users/register',
       user
     );
   }
 
-  login(user: User): Observable<Response> {
-    return this.http.post<Response>(
-      this.url + 'users/login',
-      user
-    );
+  login(user: Credentials): Observable<Response> {
+    return this.http
+      .post<Response>(
+        this.url + '/users/login',
+        user
+      )
+      .pipe(
+        catchError((res) => {
+          return of(res);
+        })
+      );
   }
 
   logout() {

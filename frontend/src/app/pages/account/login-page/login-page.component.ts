@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/components/auth/auth.service';
+import { Credentials } from 'src/app/components/login-form/login-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
@@ -17,7 +19,17 @@ export class LoginPageComponent
     'Lack of needs to save delivery data for incoming shipment',
     'Possibility to get discounts',
   ];
-  constructor() {}
+  constructor(
+    private readonly authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
+
+  onLoginUser(user: Credentials) {
+    this.authService.login(user).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+    });
+  }
 }
