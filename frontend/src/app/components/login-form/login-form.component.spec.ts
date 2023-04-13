@@ -9,23 +9,7 @@ import {
   NO_ERRORS_SCHEMA,
   NgZone,
 } from '@angular/core';
-
-function setAllControls(
-  component: LoginFormComponent
-) {
-  for (let controlName in component.loginForm
-    .controls) {
-    component.loginForm.controls[
-      controlName
-    ].setValue('test@test.com');
-    component.loginForm.controls[
-      controlName
-    ].markAsDirty();
-    component.loginForm.controls[
-      controlName
-    ].markAsTouched();
-  }
-}
+import { setAllControls } from 'src/app/mocks';
 
 describe('Testing Login Form Component', () => {
   let fixture: ComponentFixture<LoginFormComponent>;
@@ -62,13 +46,13 @@ describe('Testing Login Form Component', () => {
     it('Should return boolean depending on form validation', () => {
       expect(component.disable()).toBeTrue();
 
-      setAllControls(component);
+      setAllControls(component.loginForm);
 
       expect(component.disable()).toBeFalse();
     });
 
     it('Should emit value if submit event was invoked', (dn: DoneFn) => {
-      setAllControls(component);
+      setAllControls(component.loginForm);
       const spyOnSubmitEmitter = spyOn(
         component.submitEmitter,
         'next'

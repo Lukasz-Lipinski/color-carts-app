@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/components/auth/auth.service';
+import { ButtonLink } from 'src/app/components/button-link/button-link.component';
 import { Credentials } from 'src/app/components/login-form/login-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -13,6 +14,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 export class RegisterPageComponent
   implements OnInit
 {
+  readonly homepageButton: ButtonLink = {
+    text: 'HOME PAGE',
+    href: '',
+    isFullRow: true,
+  };
+  directive: any; // here will be toast directive but firstly must be created
   constructor(
     private readonly authService: AuthService
   ) {}
@@ -20,11 +27,11 @@ export class RegisterPageComponent
   ngOnInit(): void {}
 
   onRegisterUser(userCredentials: Credentials) {
-    console.log(userCredentials);
-    // this.authService
-    //   .register(userCredentials)
-    //   .subscribe({
-    //     next: (res) => console.log(res),
-    //   });
+    this.authService
+      .register(userCredentials)
+      .subscribe({
+        next: (res) =>
+          (this.directive = res.data),
+      });
   }
 }

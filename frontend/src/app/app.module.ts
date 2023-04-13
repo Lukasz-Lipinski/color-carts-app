@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent],

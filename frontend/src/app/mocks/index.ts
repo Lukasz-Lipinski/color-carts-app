@@ -2,8 +2,20 @@ import { of } from 'rxjs';
 import { Product } from '../pages/cart/cart.service';
 import {
   FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  Credentials,
+  LoginFormComponent,
+} from '../components/login-form/login-form.component';
+import { Component } from '@angular/core';
+import { ComponentFixture } from '@angular/core/testing';
+import { ButtonLink } from '../components/button-link/button-link.component';
+import {
+  BackendError,
+  BackendResponse,
+} from '../components/auth/auth.service';
 
 export const mockedProducts: Product[] = [
   {
@@ -48,3 +60,38 @@ export const mockedInput = new FormControl(
   'mocked input',
   [Validators.required]
 );
+
+export function setAllControls(form: FormGroup) {
+  for (let controlName in form.controls) {
+    form.controls[controlName].setValue(
+      'test@test.com'
+    );
+    form.controls[controlName].markAsDirty();
+    form.controls[controlName].markAsTouched();
+  }
+}
+
+export const mockedUserCredentials: Credentials =
+  {
+    email: 'test@test.com',
+    password: 'testest',
+  };
+
+export const mockedResponse: BackendResponse = {
+  data: {
+    email: 'test@test.com',
+    isLogged: true,
+    name: 'test',
+    surname: 'test',
+  },
+};
+
+export const mockedError: BackendError = {
+  msg: 'something went wrong',
+};
+
+export const mockedButtonLink: ButtonLink = {
+  href: 'mocked link',
+  isFullRow: false,
+  text: '',
+};

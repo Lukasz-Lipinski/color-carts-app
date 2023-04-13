@@ -1,0 +1,10 @@
+<div
+  class="py-5"
+  [ngClass]="buttonDetails.isFullRow ? 'row' : ''"
+>
+  <a
+    [routerLink]="buttonDetails.href"
+    class="link"
+    >{{ buttonDetails.text }}</a
+  >
+</div>

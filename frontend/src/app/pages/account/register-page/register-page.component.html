@@ -1,7 +1,7 @@
 <section>
-  <div>
-    <a routerLink="/"> HOME PAGE </a>
-  </div>
+  <app-button-link
+    [buttonDetails]="homepageButton"
+  ></app-button-link>
   <app-register-form
     (emitDataForRegister)="onRegisterUser($event)"
   ></app-register-form>

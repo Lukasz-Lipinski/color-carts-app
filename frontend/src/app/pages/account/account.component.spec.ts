@@ -1,23 +1,31 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+import { AccountComponent } from './account.component';
 
-// import { AccountComponent } from './account.component';
+describe('Testing Account Page Component', () => {
+  let fixture: ComponentFixture<AccountComponent>;
+  let component: AccountComponent;
 
-// describe('AccountComponent', () => {
-//   let component: AccountComponent;
-//   let fixture: ComponentFixture<AccountComponent>;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AccountComponent],
+    }).compileComponents();
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [ AccountComponent ]
-//     })
-//     .compileComponents();
+    fixture = TestBed.createComponent(
+      AccountComponent
+    );
+    component = fixture.componentInstance;
 
-//     fixture = TestBed.createComponent(AccountComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+    component.ngOnInit();
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  // describe('Class tests', () => {});
+
+  describe('DOM tests', () => {
+    it('Should be rendered', () => {
+      expect(component).toBeDefined();
+    });
+  });
+});

@@ -13,6 +13,7 @@ import { TopNavigationComponent } from '../components/top-navigation/top-navigat
 import { LoginFormComponent } from '../components/login-form/login-form.component';
 import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { RegisterFormComponent } from '../components/register-form/register-form.component';
+import { ButtonLinkComponent } from '../components/button-link/button-link.component';
 
 const components = [
   NavigationComponent,
@@ -25,6 +26,7 @@ const components = [
   LoginFormComponent,
   ErrorMessageComponent,
   RegisterFormComponent,
+  ButtonLinkComponent,
 ];
 
 @NgModule({

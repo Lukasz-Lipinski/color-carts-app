@@ -4,7 +4,6 @@ import {
 } from '@angular/core/testing';
 import { LoginPageComponent } from './login-page.component';
 import { By } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('Testing Login Page', () => {
@@ -45,6 +44,8 @@ describe('Testing Login Page', () => {
     });
 
     it('Should displayed HOME PAGE link', () => {
+      fixture.detectChanges();
+
       const homePageLink =
         fixture.debugElement.query(
           By.css('a.link')
@@ -57,19 +58,13 @@ describe('Testing Login Page', () => {
       ).toEqual('home page');
     });
 
-    it('Should displayed 2 divs with row class', () => {
-      const divs = fixture.debugElement.queryAll(
+    it('Should displayed div with row class', () => {
+      const div = fixture.debugElement.query(
         By.css('div.row')
-      );
+      ).nativeElement as HTMLDivElement;
 
-      for (let div of divs) {
-        expect(div.nativeElement).toHaveClass(
-          'row'
-        );
-        expect(div.nativeElement).toBeTruthy();
-      }
-
-      expect(divs.length).toEqual(2);
+      expect(div).toHaveClass('row');
+      expect(div).toBeTruthy();
     });
 
     it('Should displayed h3 and p with details', () => {
@@ -128,7 +123,7 @@ describe('Testing Login Page', () => {
         createAccountLink.getAttribute(
           'routerLink'
         )
-      ).toEqual('register');
+      ).toEqual('../register');
     });
   });
 });

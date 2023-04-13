@@ -25,11 +25,11 @@ export interface User {
   };
 }
 
-interface Error {
+export interface BackendError {
   msg: string;
 }
 
-interface Response {
+export interface BackendResponse {
   data: User | Error;
 }
 
@@ -52,16 +52,18 @@ export class AuthService {
 
   register(
     user: Credentials
-  ): Observable<Response> {
-    return this.http.post<Response>(
+  ): Observable<BackendResponse> {
+    return this.http.post<BackendResponse>(
       this.url + '/users/register',
       user
     );
   }
 
-  login(user: Credentials): Observable<Response> {
+  login(
+    user: Credentials
+  ): Observable<BackendResponse> {
     return this.http
-      .post<Response>(
+      .post<BackendResponse>(
         this.url + '/users/login',
         user
       )
