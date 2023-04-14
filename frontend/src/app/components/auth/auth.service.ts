@@ -8,6 +8,7 @@ import {
   Observable,
   catchError,
   of,
+  throwError,
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Credentials } from '../login-form/login-form.component';
@@ -30,7 +31,8 @@ export interface BackendError {
 }
 
 export interface BackendResponse {
-  data: User | Error;
+  data?: User;
+  error?: BackendError;
 }
 
 @Injectable({
@@ -53,10 +55,16 @@ export class AuthService {
   register(
     user: Credentials
   ): Observable<BackendResponse> {
-    return this.http.post<BackendResponse>(
-      this.url + '/users/register',
-      user
-    );
+    return this.http
+      .post<BackendResponse>(
+        this.url + '/users/register',
+        user
+      )
+      .pipe(
+        catchError((res) => {
+          return of(res);
+        })
+      );
   }
 
   login(
@@ -69,7 +77,7 @@ export class AuthService {
       )
       .pipe(
         catchError((res) => {
-          return of(res);
+          throw res;
         })
       );
   }

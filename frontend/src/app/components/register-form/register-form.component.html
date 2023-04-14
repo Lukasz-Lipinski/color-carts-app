@@ -6,16 +6,57 @@
   <div *ngFor="let control of controls">
     <label
       [for]="control.name"
-      class=""
+      class="form-label customFS"
     >
-      {{ control.name | uppercase }}
+      {{ control.label | uppercase }}
     </label>
     <input
       [id]="control.name"
       [type]="control.type"
-      class="form-control"
+      class="form-control mb-3"
       [formControlName]="control.name"
     />
+    <app-error-message
+      [control$]="getControl(control.name)"
+      *ngIf=""
+    ></app-error-message>
+  </div>
+  <div>
+    <h4 class="h4 py-2">
+      Additional information
+    </h4>
+    <div
+      formGroupName="approvals"
+      class="d-flex align-items-center gap-1"
+      *ngFor="
+        let approval of approvals;
+        let i = index
+      "
+    >
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [id]="approval.name + i"
+        [formControlName]="approval.name"
+        [ngClass]="
+          isControlValid(approval.name, true)
+            ? ''
+            : 'is-invalid'
+        "
+      />
+      <label
+        class="form-control-plaintext customFS"
+        [htmlFor]="approval.name + i"
+        [ngClass]="
+          isControlValid(approval.name, true)
+            ? ''
+            : 'text-danger'
+        "
+      >
+        {{ approval.text }}
+        <span class="text-danger fs-5">*</span>
+      </label>
+    </div>
   </div>
   <div
     class="d-flex flex-column align-items-stretch"
@@ -23,6 +64,12 @@
     <button
       type="submit"
       class="btn btn-outline-primary btn-lg mt-4"
+      [ngClass]="
+        isValidForm()
+          ? 'btn-outline-primary'
+          : 'btn-outline-danger'
+      "
+      [disabled]="!isValidForm()"
     >
       Create an account
     </button>

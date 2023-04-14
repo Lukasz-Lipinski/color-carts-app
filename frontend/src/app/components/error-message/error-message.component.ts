@@ -32,6 +32,8 @@ export class ErrorMessageComponent
         return 'Email is incorrect';
       case 'minlength':
         return 'Password must be contained at least 5 characters';
+      case 'notEqual':
+        return 'Passwords differ themself';
       default:
         return '';
     }

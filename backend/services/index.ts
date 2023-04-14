@@ -21,6 +21,15 @@ export interface User {
   };
 }
 
+export interface FrontendError {
+  msg: string;
+}
+
+export interface FrontendResponse {
+  data?: User;
+  error?: FrontendError;
+}
+
 const salt = 10;
 
 //returns client to Database

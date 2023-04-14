@@ -29,8 +29,6 @@ export const UserPageCanLoad: CanLoadFn = (
   route: Route,
   segments: UrlSegment[]
 ) => {
-  const router = inject(Router);
-
   return inject(AuthService).user.pipe(
     map((user) => user.isLogged)
   );

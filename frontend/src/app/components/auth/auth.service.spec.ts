@@ -44,6 +44,26 @@ describe('Testing Auth Service', () => {
       .flush(mockedResponse);
   });
 
+  it('Should return error if something went wrong during registration', (dn: DoneFn) => {
+    service
+      .register(mockedUserCredentials)
+      .subscribe({
+        next: ({ error }) => {
+          expect(error!).toBeDefined();
+          expect(error?.msg).toEqual(
+            mockedError.msg
+          );
+          dn();
+        },
+      });
+
+    controller
+      .expectOne(url + '/users/register')
+      .flush({
+        error: mockedError,
+      });
+  });
+
   it('Should return mocked response if login method was invoked', (dn: DoneFn) => {
     service
       .login(mockedUserCredentials)
@@ -61,19 +81,23 @@ describe('Testing Auth Service', () => {
       .flush(mockedResponse);
   });
 
-  it('Should return error if something went wrong during registration', (dn: DoneFn) => {
+  it('Should catch error and handle backend masssge', (dn: DoneFn) => {
     service
-      .register(mockedUserCredentials)
+      .login(mockedUserCredentials)
       .subscribe({
-        next: (error) => {
-          expect(error).toBe(mockedError);
-          console.log(error);
-          dn.fail();
+        next: ({ error }) => {
+          expect(error).toBeDefined();
+          expect(error?.msg).toEqual(
+            mockedError.msg
+          );
+          dn();
         },
       });
 
     controller
-      .expectOne(url + '/users/register')
-      .flush(mockedError);
+      .expectOne(url + '/users/login')
+      .flush({
+        error: mockedError,
+      });
   });
 });

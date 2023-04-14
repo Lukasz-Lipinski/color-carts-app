@@ -6,10 +6,8 @@ import {
   Output,
 } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { of } from 'rxjs';
@@ -17,6 +15,7 @@ import { of } from 'rxjs';
 export interface Control {
   name: string;
   type: 'email' | 'password';
+  label?: string;
 }
 
 interface LoginForm {

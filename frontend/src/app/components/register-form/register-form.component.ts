@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   OnInit,
@@ -8,6 +10,7 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
+  FormGroupName,
   ValidationErrors,
   ValidatorFn,
   Validators,
@@ -16,11 +19,23 @@ import {
   Control,
   Credentials,
 } from '../login-form/login-form.component';
+import { of } from 'rxjs';
+
+interface Approval {
+  text: string;
+  name: string;
+}
+
+interface ApprovalGroup {
+  shopPolicy: FormControl<boolean>;
+  privacyPolicy: FormControl<boolean>;
+}
 
 interface RegisterForm {
   email: FormControl<string>;
   password: FormControl<string>;
   confirmingPassword: FormControl<string>;
+  approvals: FormGroup<ApprovalGroup>;
 }
 
 const comparingPasswordsValidator = (
@@ -33,7 +48,7 @@ const comparingPasswordsValidator = (
       passForCompering.value
       ? null
       : {
-          notEqual: 'Passwords are diverse',
+          notEqual: '',
         };
   };
 };
@@ -42,22 +57,36 @@ const comparingPasswordsValidator = (
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterFormComponent
   implements OnInit
 {
-  controls: Control[] = [
+  readonly approvals: Approval[] = [
+    {
+      text: 'I confirm I was informed about Color Carts policy and consent it',
+      name: 'shopPolicy',
+    },
+    {
+      name: 'privacyPolicy',
+      text: 'I confirm I was infomred about privacy policy of Color Carts',
+    },
+  ];
+  readonly controls: Control[] = [
     {
       name: 'email',
       type: 'email',
+      label: 'email',
     },
     {
       name: 'password',
       type: 'password',
+      label: 'password',
     },
     {
       name: 'confirmingPassword',
       type: 'password',
+      label: 'confirm password',
     },
   ];
   registerForm!: FormGroup<RegisterForm>;
@@ -86,6 +115,16 @@ export class RegisterFormComponent
         nonNullable: true,
         validators: [Validators.required],
       }),
+      approvals: new FormGroup({
+        shopPolicy: new FormControl(false, {
+          nonNullable: true,
+          validators: [Validators.requiredTrue],
+        }),
+        privacyPolicy: new FormControl(false, {
+          nonNullable: true,
+          validators: [Validators.requiredTrue],
+        }),
+      }),
     });
 
     this.registerForm.controls[
@@ -94,6 +133,39 @@ export class RegisterFormComponent
       comparingPasswordsValidator(
         this.registerForm.controls['password']
       )
+    );
+  }
+
+  isValidForm(): boolean {
+    return this.registerForm.valid;
+  }
+
+  isControlValid(
+    name: string,
+    isApprovalsGroup: boolean = false
+  ) {
+    const control = isApprovalsGroup
+      ? this.registerForm.controls['approvals']
+          .controls[name as keyof ApprovalGroup]
+      : this.registerForm.controls[
+          name as keyof RegisterForm
+        ];
+
+    if (
+      control.invalid &&
+      !control.touched &&
+      !control.dirty
+    )
+      return true;
+
+    return control.valid && control.dirty;
+  }
+
+  getControl(controlName: string) {
+    return of(
+      this.registerForm.controls[
+        controlName as keyof RegisterForm
+      ]
     );
   }
 
