@@ -14,6 +14,8 @@ import { LoginFormComponent } from '../components/login-form/login-form.componen
 import { ErrorMessageComponent } from '../components/error-message/error-message.component';
 import { RegisterFormComponent } from '../components/register-form/register-form.component';
 import { ButtonLinkComponent } from '../components/button-link/button-link.component';
+import { BestsellersComponent } from '../components/bestsellers/bestsellers.component';
+import { RandomCategoryComponent } from '../components/random-category/random-category.component';
 
 const components = [
   NavigationComponent,
@@ -27,6 +29,8 @@ const components = [
   ErrorMessageComponent,
   RegisterFormComponent,
   ButtonLinkComponent,
+  BestsellersComponent,
+  RandomCategoryComponent,
 ];
 
 @NgModule({

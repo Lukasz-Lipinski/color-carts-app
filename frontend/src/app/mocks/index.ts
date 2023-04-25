@@ -16,6 +16,10 @@ import {
   BackendError,
   BackendResponse,
 } from '../components/auth/auth.service';
+import {
+  ApprovalGroup,
+  RegisterForm,
+} from '../components/register-form/register-form.component';
 
 export const mockedProducts: Product[] = [
   {
@@ -63,11 +67,36 @@ export const mockedInput = new FormControl(
 
 export function setAllControls(form: FormGroup) {
   for (let controlName in form.controls) {
-    form.controls[controlName].setValue(
-      'test@test.com'
-    );
+    form.controls[
+      controlName as keyof RegisterForm
+    ] instanceof FormControl &&
+      form.controls[controlName].setValue(
+        'test@test.com'
+      );
     form.controls[controlName].markAsDirty();
     form.controls[controlName].markAsTouched();
+  }
+}
+
+export function setAllControlsInInnerFormGroup(
+  form: FormGroup
+) {
+  const innerFormGroup = form.controls[
+    'approvals'
+  ] as FormGroup<ApprovalGroup>;
+
+  for (let approval in innerFormGroup.controls) {
+    innerFormGroup.controls[
+      approval as keyof ApprovalGroup
+    ].setValue(true);
+
+    innerFormGroup.controls[
+      approval as keyof ApprovalGroup
+    ].markAsDirty();
+
+    innerFormGroup.controls[
+      approval as keyof ApprovalGroup
+    ].markAsTouched();
   }
 }
 

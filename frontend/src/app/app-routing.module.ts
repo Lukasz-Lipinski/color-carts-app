@@ -13,7 +13,10 @@ import {
 const routes: Routes = [
   {
     path: '',
-    component: HomePageComponent,
+    loadComponent: () =>
+      import(
+        './pages/home-page/home-page.component'
+      ).then((m) => m.HomePageComponent),
     pathMatch: 'full',
   },
   {

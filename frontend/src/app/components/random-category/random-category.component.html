@@ -1,0 +1,44 @@
+<div
+  class="carousel carousel-fade"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-inner">
+    <div
+      *ngFor="
+        let category of categories;
+        let i = index
+      "
+      class="carousel-item p-3 d-flex justify-content-center"
+      [ngClass]="
+        slideNumber === i ? 'active' : ''
+      "
+    >
+      <a
+        [routerLink]="category"
+        class="border p-5 w-50 text-center fs-2 link-dark text-decoration-none"
+      >
+        {{ category | uppercase }}
+      </a>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev carousel-dark"
+    type="button"
+    (click)="onChangeSlide('decrease')"
+  >
+    <span
+      class="carousel-control-prev-icon"
+      aria-hidden="true"
+    ></span>
+  </button>
+  <button
+    (click)="onChangeSlide('increase')"
+    class="carousel-control-next carousel-dark"
+    type="button"
+  >
+    <span
+      class="carousel-control-next-icon"
+      aria-hidden="true"
+    ></span>
+  </button>
+</div>

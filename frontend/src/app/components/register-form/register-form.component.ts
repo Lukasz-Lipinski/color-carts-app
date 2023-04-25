@@ -10,7 +10,6 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
-  FormGroupName,
   ValidationErrors,
   ValidatorFn,
   Validators,
@@ -26,12 +25,12 @@ interface Approval {
   name: string;
 }
 
-interface ApprovalGroup {
+export interface ApprovalGroup {
   shopPolicy: FormControl<boolean>;
   privacyPolicy: FormControl<boolean>;
 }
 
-interface RegisterForm {
+export interface RegisterForm {
   email: FormControl<string>;
   password: FormControl<string>;
   confirmingPassword: FormControl<string>;
