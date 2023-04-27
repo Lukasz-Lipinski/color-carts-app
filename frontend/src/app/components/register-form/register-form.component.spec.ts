@@ -12,8 +12,11 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   setAllControls,
   setAllControlsInInnerFormGroup,
+  wrongMockedInputStream$,
 } from 'src/app/mocks';
 import { FormControl } from '@angular/forms';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('RegisterFormComponent', () => {
   let component: RegisterFormComponent;
@@ -22,6 +25,7 @@ describe('RegisterFormComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RegisterFormComponent],
+      imports: [SharedModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 

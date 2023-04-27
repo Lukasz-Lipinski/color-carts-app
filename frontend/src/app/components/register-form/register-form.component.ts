@@ -71,7 +71,7 @@ export class RegisterFormComponent
       text: 'I confirm I was infomred about privacy policy of Color Carts',
     },
   ];
-  readonly controls: Control[] = [
+  controls: Control[] = [
     {
       name: 'email',
       type: 'email',

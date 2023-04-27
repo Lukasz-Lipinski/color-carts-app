@@ -65,6 +65,11 @@ export const mockedInput = new FormControl(
   [Validators.required]
 );
 
+export const wrongMockedInput = new FormControl(
+  '',
+  [Validators.required]
+);
+
 export function setAllControls(form: FormGroup) {
   for (let controlName in form.controls) {
     form.controls[
@@ -124,3 +129,9 @@ export const mockedButtonLink: ButtonLink = {
   isFullRow: false,
   text: '',
 };
+
+export const mockedCategories: Array<string> = [
+  'test 1',
+  'test 2',
+  'test 3',
+];

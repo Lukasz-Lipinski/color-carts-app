@@ -1,0 +1,12 @@
+.carousel {
+
+  &:hover {
+    button {
+      display: block;
+    }
+  }
+
+  button {
+    display: none
+  }
+}
