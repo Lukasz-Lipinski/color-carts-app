@@ -16,11 +16,9 @@
   .custom-logo {
     display: block;
     cursor: pointer;
-    font-size: 4.2rem;
     transform: scale(1);
     transition: 0.2s;
     text-decoration: none;
-
 
     &:hover {
       transform: scale(120%);

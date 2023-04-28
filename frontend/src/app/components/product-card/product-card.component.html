@@ -1,0 +1,31 @@
+<div class="card w-25">
+  <div class="card-header">
+    <div class="card-title fw-bolder">
+      {{ item.brand | uppercase }}
+    </div>
+  </div>
+  <div class="card-body">
+    <h6 class="card-subtitle">
+      ({{ item.name }})
+    </h6>
+    <h6 class="card-subtitle">
+      {{ item.model }}
+    </h6>
+    <section class="py-3">
+      <h6 class="card-subtitle">Description</h6>
+      <p class="card-text">
+        {{ item.description }}
+      </p>
+    </section>
+  </div>
+  <div
+    class="card-footer d-flex justify-content-center align-items-center"
+  >
+    <button class="btn btn-outline-dark col-6">
+      Add to cart <span class="bi-cart"></span>
+    </button>
+    <h5 class="card-title col text-center">
+      {{ item.price | currency }}
+    </h5>
+  </div>
+</div>

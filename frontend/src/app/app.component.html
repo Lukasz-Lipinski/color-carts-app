@@ -1,7 +1,19 @@
-<main>
+<main *ngIf="!isLoading; else Spinner">
   <app-top-navigation></app-top-navigation>
   <div class="container-fluid">
     <router-outlet></router-outlet>
   </div>
-  <footer>footer</footer>
+  <app-footer></app-footer>
 </main>
+
+<ng-template #Spinner>
+  <div
+    class="progress"
+    role="progressbar"
+    style="border-radius: 0px"
+  >
+    <div
+      class="progress-bar progress-bar-animated progress-bar-striped w-100 bg-dark"
+    ></div>
+  </div>
+</ng-template>

@@ -4,11 +4,11 @@ import {
   RouterModule,
   Routes,
 } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
 import {
   UserPageCanActive,
   UserPageCanLoad,
 } from './pages/account/account.guard';
+import { HomePageResolver } from './pages/home-page/home-page.resolver';
 
 const routes: Routes = [
   {
@@ -59,11 +59,44 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'info',
+    loadComponent: () =>
+      import(
+        './pages/info-page/info-page.component'
+      ).then((m) => m.InfoPageComponent),
+    children: [
+      {
+        path: 'regulamin',
+        loadComponent: () =>
+          import(
+            './pages/info-page/regulamin-page/regulamin-page.component'
+          ).then((m) => m.RegulaminPageComponent),
+      },
+      {
+        path: 'claims',
+        loadComponent: () =>
+          import(
+            './pages/info-page/claims-page/claims-page.component'
+          ).then((m) => m.ClaimsPageComponent),
+      },
+      {
+        path: 'privacy-policy',
+        loadComponent: () =>
+          import(
+            './pages/info-page/policy-page/policy-page.component'
+          ).then((m) => m.PolicyPageComponent),
+      },
+    ],
+  },
+  {
     path: ':category',
     loadComponent: () =>
       import(
         './pages/category-page/category-page.component'
       ).then((m) => m.CategoryPageComponent),
+    resolve: {
+      bestsellers: HomePageResolver,
+    },
     children: [
       {
         path: ':subcategory',
@@ -71,6 +104,7 @@ const routes: Routes = [
           import(
             './pages/category-page/category-page.component'
           ).then((m) => m.CategoryPageComponent),
+        outlet: 'subcategory',
       },
     ],
   },

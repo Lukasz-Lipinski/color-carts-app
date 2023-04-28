@@ -16,6 +16,8 @@ import { RegisterFormComponent } from '../components/register-form/register-form
 import { ButtonLinkComponent } from '../components/button-link/button-link.component';
 import { BestsellersComponent } from '../components/bestsellers/bestsellers.component';
 import { RandomCategoryComponent } from '../components/random-category/random-category.component';
+import { FooterComponent } from '../components/footer/footer.component';
+import { ProductCardComponent } from '../components/product-card/product-card.component';
 
 const components = [
   NavigationComponent,
@@ -31,6 +33,8 @@ const components = [
   ButtonLinkComponent,
   BestsellersComponent,
   RandomCategoryComponent,
+  FooterComponent,
+  ProductCardComponent,
 ];
 
 @NgModule({

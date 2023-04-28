@@ -1,0 +1,28 @@
+<footer
+  class="d-flex justify-content-between p-4"
+>
+  <section class="d-flex gap-5">
+    <ng-container
+      *ngFor="let footerColumn of footerColumns"
+    >
+      <div>
+        <h5 class="h5">
+          {{ footerColumn.header }}
+        </h5>
+        <ng-container
+          *ngFor="
+            let footerLink of footerColumn.links
+          "
+        >
+          <a
+            [routerLink]="footerLink.href"
+            class="d-block py-1 text-dark"
+          >
+            {{ footerLink.label }}
+          </a>
+        </ng-container>
+      </div>
+    </ng-container>
+  </section>
+  <app-logo size="sm"></app-logo>
+</footer>

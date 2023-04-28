@@ -1,2 +1,19 @@
-<p>Category Page</p>
-<router-outlet></router-outlet>
+<h1>Category Page</h1>
+
+<ng-container
+  *ngIf="bestsellers | async as items"
+>
+  <ul>
+    <ng-container *ngFor="let item of items">
+      <app-product-card
+        [item]="item"
+      ></app-product-card>
+    </ng-container>
+  </ul>
+</ng-container>
+
+<ng-container>
+  <router-outlet
+    name="subcategory"
+  ></router-outlet>
+</ng-container>

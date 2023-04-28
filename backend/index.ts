@@ -27,11 +27,11 @@ app.use(
   bodyparser.json()
 );
 
-app.use('/products', ProductRoutes);
-app.use('/users', UserRoutes);
+app.use('/api/products', ProductRoutes);
+app.use('/api/users', UserRoutes);
 
 app.get(
-  '/test',
+  '/api/test',
   (req: Request, res: Response) => {
     res.json({
       msg: 'hello world!',
@@ -39,7 +39,7 @@ app.get(
   }
 );
 
-app.use('/', (req: Request, res: Response) => {
+app.use('/api', (req: Request, res: Response) => {
   res.sendFile(
     path.join(
       process.cwd(),
