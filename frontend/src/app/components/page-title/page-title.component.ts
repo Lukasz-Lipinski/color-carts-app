@@ -1,19 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnInit,
 } from '@angular/core';
 
 @Component({
-  selector: 'app-bestsellers',
-  templateUrl: './bestsellers.component.html',
-  styleUrls: ['./bestsellers.component.scss'],
+  selector: 'app-page-title[pageTitle]',
+  templateUrl: './page-title.component.html',
+  styleUrls: ['./page-title.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BestsellersComponent
+export class PageTitleComponent
   implements OnInit
 {
-  title = 'Bestsellers';
+  @Input() pageTitle!: string;
   constructor() {}
 
   ngOnInit(): void {}

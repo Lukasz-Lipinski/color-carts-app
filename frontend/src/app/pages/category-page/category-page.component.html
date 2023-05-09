@@ -1,19 +1,34 @@
-<h1>Category Page</h1>
-
-<ng-container
-  *ngIf="bestsellers | async as items"
->
-  <ul>
-    <ng-container *ngFor="let item of items">
-      <app-product-card
-        [item]="item"
-      ></app-product-card>
-    </ng-container>
-  </ul>
-</ng-container>
-
 <ng-container>
-  <router-outlet
-    name="subcategory"
-  ></router-outlet>
+  <app-page-title
+    [pageTitle]="
+      (title | async | uppercase) || ''
+    "
+  ></app-page-title>
+
+  <ng-container
+    *ngIf="bestsellers | async as items"
+  >
+    <ul
+      class="d-flex justify-content-center flex-wrap gap-4 m-0 px-2"
+    >
+      <ng-container *ngFor="let item of items">
+        <app-product-card
+          [item]="item"
+          class="col-3"
+        ></app-product-card>
+      </ng-container>
+    </ul>
+  </ng-container>
+
+  <ng-container>
+    <router-outlet
+      name="category"
+    ></router-outlet>
+  </ng-container>
+
+  <ng-container>
+    <router-outlet
+      name="subcategory"
+    ></router-outlet>
+  </ng-container>
 </ng-container>

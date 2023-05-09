@@ -1,0 +1,13 @@
+.boxheader {
+  position: relative;
+  border-bottom: 3px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    position: absolute;
+    text-align: center;
+    background-color: white;
+  }
+}

@@ -32,21 +32,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent implements OnInit {
-  // bestsellers!: Observable<Product[]>;
   readonly categories: string[] = [
     'garden',
     'home',
     'accessories for food',
   ];
 
-  constructor(
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    // this.bestsellers =
-    //   this.activatedRoute.data.pipe(
-    //     map(({ bestsellers }) => bestsellers)
-    //   );
-  }
+  ngOnInit(): void {}
 }

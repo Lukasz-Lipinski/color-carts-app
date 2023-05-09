@@ -5,11 +5,11 @@ import {
 } from '@angular/core';
 import {
   ActivatedRoute,
+  ParamMap,
   Params,
 } from '@angular/router';
 import {
   Observable,
-  concat,
   concatMap,
   map,
   of,
@@ -29,6 +29,8 @@ export class CategoryPageComponent
   implements OnInit
 {
   bestsellers!: Observable<Product[] | null>;
+  title!: Observable<string>;
+
   constructor(
     private readonly activatedRoute: ActivatedRoute
   ) {}
@@ -46,6 +48,14 @@ export class CategoryPageComponent
               )
             : of(null);
         })
+      );
+
+    this.title =
+      this.activatedRoute.paramMap.pipe(
+        map(
+          (param: ParamMap) =>
+            param.get('category') || ''
+        )
       );
   }
 }
