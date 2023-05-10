@@ -13,7 +13,7 @@ import {
 export class BestsellersComponent
   implements OnInit
 {
-  title = 'Bestsellers';
+  readonly title = 'Bestsellers';
   constructor() {}
 
   ngOnInit(): void {}

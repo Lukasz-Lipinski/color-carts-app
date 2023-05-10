@@ -7,6 +7,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { PageTitleComponent } from '../page-title/page-title.component';
 
 describe('Testing Bestsellers Component', () => {
   let component: BestsellersComponent;
@@ -16,7 +17,10 @@ describe('Testing Bestsellers Component', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BestsellersComponent],
+      declarations: [
+        BestsellersComponent,
+        PageTitleComponent,
+      ],
       imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -31,20 +35,19 @@ describe('Testing Bestsellers Component', () => {
     component.ngOnInit();
     fixture.detectChanges();
   });
+
+  describe('Class tests', () => {
+    it("Should return title as 'Bestsellers'", () => {
+      expect(component.title).toEqual(
+        'Bestsellers'
+      );
+    });
+  });
+
   describe('DOM tests', () => {
     it('Should be rendered', () => {
       expect(component).toBeDefined();
       expect(component).toBeTruthy();
-    });
-
-    it('Should rendered header with Bestsellers text', () => {
-      const h3 = fixture.debugElement.query(
-        By.css('h3')
-      ).nativeElement as HTMLDivElement;
-      expect(h3).toBeTruthy();
-      expect(
-        h3.textContent?.trim()?.toLowerCase()
-      ).toEqual('bestsellers');
     });
 
     it('Should rendered button and had routerLink setup as bestsellers', () => {
@@ -58,6 +61,22 @@ describe('Testing Bestsellers Component', () => {
       expect(
         btn.getAttribute('routerLink')
       ).toEqual('/bestsellers');
+    });
+
+    it('Should rendered Page Title Component', () => {
+      const pageTitleComponent =
+        fixture.debugElement.query(
+          By.directive(PageTitleComponent)
+        );
+
+      const pageTitle = pageTitleComponent.query(
+        By.css('h3')
+      ).nativeElement as HTMLHeadingElement;
+
+      expect(pageTitleComponent).toBeTruthy();
+      expect(
+        pageTitle.textContent?.trim()
+      ).toEqual('Bestsellers');
     });
   });
 });

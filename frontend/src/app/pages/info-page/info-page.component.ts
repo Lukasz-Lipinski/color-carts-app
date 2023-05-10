@@ -14,10 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [SharedModule],
 })
 export class InfoPageComponent implements OnInit {
-  // infoParam: Observable<string>;
-  constructor(
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

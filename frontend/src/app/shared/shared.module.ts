@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthComponent } from '../components/auth/auth.component';
 import { LogoComponent } from '../components/logo/logo.component';
 import { SearcherComponent } from '../components/searcher/searcher.component';
 import { InformationBarComponent } from '../components/top-navigation/information-bar/information-bar.component';
@@ -27,7 +26,6 @@ const components = [
   SearcherComponent,
   MiddlePartComponent,
   LogoComponent,
-  AuthComponent,
   LoginFormComponent,
   ErrorMessageComponent,
   RegisterFormComponent,
