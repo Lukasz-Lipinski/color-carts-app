@@ -16,6 +16,21 @@ export class ProductCardComponent
   implements OnInit
 {
   @Input() item!: Product;
+
+  public setDescription(): string {
+    const amount: number = 25;
+
+    if (this.item.description.length < amount)
+      return this.item.description;
+    else
+      return (
+        this.item.description.substring(
+          0,
+          amount
+        ) + '...'
+      );
+  }
+
   constructor() {}
 
   ngOnInit(): void {}

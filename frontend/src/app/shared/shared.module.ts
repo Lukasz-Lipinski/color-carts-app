@@ -18,8 +18,9 @@ import { RandomCategoryComponent } from '../components/random-category/random-ca
 import { FooterComponent } from '../components/footer/footer.component';
 import { ProductCardComponent } from '../components/product-card/product-card.component';
 import { PageTitleComponent } from '../components/page-title/page-title.component';
+import { InfoShopPartComponent } from '../components/info-shop-part/info-shop-part.component';
 
-const components = [
+export const components = [
   NavigationComponent,
   TopNavigationComponent,
   InformationBarComponent,
@@ -35,6 +36,7 @@ const components = [
   FooterComponent,
   ProductCardComponent,
   PageTitleComponent,
+  InfoShopPartComponent,
 ];
 
 @NgModule({

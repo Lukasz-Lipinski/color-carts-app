@@ -1,0 +1,31 @@
+<section class="container-fluid">
+  <app-page-title
+    class="row pb-3"
+    [pageTitle]="getTitle"
+  ></app-page-title>
+  <div class="row bg-light p-5">
+    <div class="col-6">
+      <ng-container
+        *ngFor="
+          let deliveryInfo of getDeliveryInfo
+        "
+      >
+        <div class="py-2">
+          <h3 class="h3 py-2">
+            {{ deliveryInfo.header }}
+          </h3>
+          <p>
+            {{ deliveryInfo.paragraph }}
+          </p>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-6">
+      <img
+        class="img-fluid opacity"
+        [src]="getImgSrc"
+        alt="shipping-icon.jpg"
+      />
+    </div>
+  </div>
+</section>

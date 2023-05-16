@@ -5,20 +5,18 @@
     "
   ></app-page-title>
 
-  <ng-container
+  <div
     *ngIf="bestsellers | async as items"
+    class="d-flex justify-content-center"
   >
-    <ul
-      class="d-flex justify-content-center flex-wrap gap-4 m-0 px-2"
-    >
+    <ul class="w-75 d-flex flex-wrap gap-3">
       <ng-container *ngFor="let item of items">
         <app-product-card
           [item]="item"
-          class="col-3"
         ></app-product-card>
       </ng-container>
     </ul>
-  </ng-container>
+  </div>
 
   <ng-container>
     <router-outlet

@@ -21,8 +21,6 @@ describe('Testing Account Page Component', () => {
     component.ngOnInit();
   });
 
-  // describe('Class tests', () => {});
-
   describe('DOM tests', () => {
     it('Should be rendered', () => {
       expect(component).toBeDefined();

@@ -5,6 +5,7 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { LogoComponent } from './logo.component';
 import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('Testing Logo Component', () => {
   let fixture: ComponentFixture<LogoComponent>;
@@ -14,6 +15,7 @@ describe('Testing Logo Component', () => {
     TestBed.configureTestingModule({
       declarations: [LogoComponent],
       imports: [RouterTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(

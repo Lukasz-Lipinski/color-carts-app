@@ -4,12 +4,12 @@ import {
   OnInit,
 } from '@angular/core';
 
-interface FooterLink {
+export interface FooterLink {
   label: string;
   href: string;
 }
 
-interface FooterColumn {
+export interface FooterColumn {
   header: string;
   links: FooterLink[];
 }
@@ -21,7 +21,7 @@ interface FooterColumn {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent implements OnInit {
-  footerColumns: FooterColumn[] = [
+  readonly footerColumns: FooterColumn[] = [
     {
       header: 'Information',
       links: [
