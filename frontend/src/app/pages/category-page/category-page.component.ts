@@ -28,7 +28,7 @@ import { Product } from '../cart/cart.service';
 export class CategoryPageComponent
   implements OnInit
 {
-  bestsellers!: Observable<Product[] | null>;
+  products!: Observable<Product[] | null>;
   title!: Observable<string>;
 
   constructor(
@@ -36,19 +36,13 @@ export class CategoryPageComponent
   ) {}
 
   ngOnInit(): void {
-    this.bestsellers =
-      this.activatedRoute.params.pipe(
-        concatMap((params: Params) => {
-          return params['category'] ===
-            'bestsellers'
-            ? this.activatedRoute.data.pipe(
-                map(
-                  ({ bestsellers }) => bestsellers
-                )
-              )
-            : of(null);
-        })
-      );
+    this.products = this.activatedRoute.data.pipe(
+      map(({ products }) =>
+        (products['data'] as Product[]).length
+          ? (products['data'] as Product[])
+          : null
+      )
+    );
 
     this.title =
       this.activatedRoute.paramMap.pipe(

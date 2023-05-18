@@ -1,0 +1,20 @@
+<section
+  class="container-fluid row py-3"
+  *ngIf="
+    products$ | async;
+    else LackOfProductsInformation
+  "
+>
+  <div class="col-3">
+    <app-filtering-menu></app-filtering-menu>
+  </div>
+  <div class="col-9">
+    <p>{{ products$ | async | json }}</p>
+  </div>
+</section>
+
+<ng-template #LackOfProductsInformation>
+  <div class="container text-center">
+    <h3 class="h3">Lack of products</h3>
+  </div>
+</ng-template>

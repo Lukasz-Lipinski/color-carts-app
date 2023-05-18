@@ -5,6 +5,7 @@ import express, {
 import {
   Credentials,
   FrontendResponse,
+  User,
   addNewUser,
   findUser,
 } from '../services';
@@ -18,7 +19,7 @@ router.get('/', (req: Request, res: Response) => {
 router.post<
   any,
   any,
-  FrontendResponse,
+  FrontendResponse<User>,
   Credentials
 >('/login', async (req, res) => {
   const foundUser = await findUser(req.body);
@@ -37,7 +38,7 @@ router.post<
 router.post<
   any,
   any,
-  FrontendResponse,
+  FrontendResponse<User>,
   Credentials
 >('/register', async (req, res) => {
   const user = await findUser(req.body);

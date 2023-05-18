@@ -24,4 +24,20 @@ export class ProductsService {
       this.url + '/bestsellers'
     );
   }
+  getProductsByCategory(
+    category: string
+  ): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `${this.url}/${category}`
+    );
+  }
+
+  getProductsByCategoryAndSubcategory(
+    category: string,
+    subcategory: string
+  ): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `${this.url}/${category}/${subcategory}`
+    );
+  }
 }

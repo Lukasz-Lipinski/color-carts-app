@@ -19,8 +19,10 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { ProductCardComponent } from '../components/product-card/product-card.component';
 import { PageTitleComponent } from '../components/page-title/page-title.component';
 import { InfoShopPartComponent } from '../components/info-shop-part/info-shop-part.component';
+import { FilteringMenuComponent } from '../components/filtering-menu/filtering-menu.component';
 
 export const components = [
+  FilteringMenuComponent,
   NavigationComponent,
   TopNavigationComponent,
   InformationBarComponent,

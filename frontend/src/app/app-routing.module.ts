@@ -90,21 +90,28 @@ const routes: Routes = [
   },
   {
     path: ':category',
-    loadComponent: () =>
-      import(
-        './pages/category-page/category-page.component'
-      ).then((m) => m.CategoryPageComponent),
-    resolve: {
-      bestsellers: HomePageResolver,
-    },
     children: [
       {
-        path: ':subcategory',
+        path: '',
         loadComponent: () =>
           import(
             './pages/category-page/category-page.component'
           ).then((m) => m.CategoryPageComponent),
-        outlet: 'subcategory',
+        resolve: {
+          products: HomePageResolver,
+        },
+      },
+      {
+        path: ':subcategory',
+        loadComponent: () =>
+          import(
+            './pages/subcategory-page/subcategory-page.component'
+          ).then(
+            (m) => m.SubcategoryPageComponent
+          ),
+        resolve: {
+          products: HomePageResolver,
+        },
       },
     ],
   },

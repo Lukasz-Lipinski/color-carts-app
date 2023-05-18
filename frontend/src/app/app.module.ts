@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { InfoShopPartComponent } from './components/info-shop-part/info-shop-part.component';
 
 @NgModule({
   declarations: [AppComponent],

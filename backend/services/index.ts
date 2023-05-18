@@ -1,7 +1,19 @@
 import { hash } from 'bcrypt';
 import { MongoClient, ObjectId } from 'mongodb';
 
-export interface Product {}
+export interface Product {
+  _id: string;
+  id: string;
+  name: string;
+  brand: string;
+  ean: number;
+  price: number;
+  amount: number;
+  category: string;
+  subcategory: string;
+  description: string;
+  model: string;
+}
 
 export interface Credentials {
   email: string;
@@ -25,8 +37,8 @@ export interface FrontendError {
   msg: string;
 }
 
-export interface FrontendResponse {
-  data?: User;
+export interface FrontendResponse<T> {
+  data?: T;
   error?: FrontendError;
 }
 
@@ -53,13 +65,24 @@ export async function comparePasswords(
     hashedPassword
   );
 }
+
 //returns an array of products
 export async function getAllProducts() {
   const client = await connectToDB();
-  return await client
+  return (await client
     .collection<Product>('products')
     .find()
-    .toArray();
+    .toArray()) as Product[];
+}
+
+export async function getProductsByCategory(
+  category: string
+) {
+  const allProducts = await getAllProducts();
+
+  return allProducts.filter(
+    (product) => product.category === category
+  );
 }
 
 //add new user to DB

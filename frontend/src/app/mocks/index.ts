@@ -5,12 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  Credentials,
-  LoginFormComponent,
-} from '../components/login-form/login-form.component';
-import { Component } from '@angular/core';
-import { ComponentFixture } from '@angular/core/testing';
+import { Credentials } from '../components/login-form/login-form.component';
 import { ButtonLink } from '../components/button-link/button-link.component';
 import {
   BackendError,

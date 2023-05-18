@@ -2,7 +2,12 @@ import express, {
   Request,
   Response,
 } from 'express';
-import { getAllProducts } from '../services';
+import {
+  FrontendResponse,
+  Product,
+  getAllProducts,
+  getProductsByCategory,
+} from '../services';
 
 const router = express.Router();
 
@@ -20,21 +25,77 @@ router.get(
   }
 );
 
-router.get(
-  '/bestsellers',
-  async (req: Request, res: Response) => {
-    const bestsellers = (
-      await getAllProducts()
-    ).slice(0, 5);
+router.get<
+  any,
+  any,
+  FrontendResponse<Product[]>,
+  any
+>('/bestsellers', async (req, res) => {
+  const products = (await getAllProducts()).slice(
+    0,
+    5
+  );
 
-    bestsellers &&
-      res.status(200).json(bestsellers);
+  products &&
+    res.status(200).json({
+      data: products,
+    });
 
-    !bestsellers &&
-      res.status(404).json({
+  !products &&
+    res.status(404).json({
+      error: {
         msg: 'Not found',
+      },
+    });
+});
+
+router.get<
+  any,
+  any,
+  FrontendResponse<Product[]>,
+  any
+>('/:category', async (req, res) => {
+  const { category } = req.params;
+  const products = await getProductsByCategory(
+    category
+  );
+
+  return products
+    ? res.status(200).json({
+        data: products,
+      })
+    : res.status(404).json({
+        error: {
+          msg: 'Not found',
+        },
       });
-  }
-);
+});
+
+router.get<
+  any,
+  any,
+  FrontendResponse<Product[]>,
+  any
+>('/:category/:subcategory', async (req, res) => {
+  const { category, subcategory } = req.params;
+
+  const allProducts = await getAllProducts();
+
+  const products = allProducts.filter(
+    (product) =>
+      product.category === category &&
+      product.subcategory === subcategory
+  );
+
+  return products.length
+    ? res.status(200).json({
+        data: products,
+      })
+    : res.status(404).json({
+        error: {
+          msg: 'Not found',
+        },
+      });
+});
 
 export default router;

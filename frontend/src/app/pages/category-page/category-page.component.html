@@ -6,7 +6,10 @@
   ></app-page-title>
 
   <div
-    *ngIf="bestsellers | async as items"
+    *ngIf="
+      products | async as items;
+      else LackOfProductsLabel
+    "
     class="d-flex justify-content-center"
   >
     <ul class="w-75 d-flex flex-wrap gap-3">
@@ -18,15 +21,11 @@
     </ul>
   </div>
 
-  <ng-container>
-    <router-outlet
-      name="category"
-    ></router-outlet>
-  </ng-container>
-
-  <ng-container>
-    <router-outlet
-      name="subcategory"
-    ></router-outlet>
-  </ng-container>
+  <ng-template #LackOfProductsLabel>
+    <div class="container">
+      <h3 class="h3 text-center py-4">
+        Currently there are not products yet
+      </h3>
+    </div>
+  </ng-template>
 </ng-container>
