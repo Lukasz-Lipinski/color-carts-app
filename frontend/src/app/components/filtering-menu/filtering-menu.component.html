@@ -1,1 +1,34 @@
-<p>filtering-menu works!</p>
+<nav class="bg-light rounded-3 p-3 fontSize">
+  <form
+    [formGroup]="getMenuForm"
+    (ngSubmit)="onFilterElement()"
+    class="d-flex flex-column gap-1"
+  >
+    <div class="py-2">
+      <p class="text-center fw-bold">
+        Minimum price:
+      </p>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="minPrice"
+      />
+    </div>
+
+    <div class="py-2">
+      <p class="text-center fw-bold">
+        Maximum price:
+      </p>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="maxPrice"
+      />
+    </div>
+
+    <button class="btn btn-outline-success">
+      FILTER
+      <span class="bi bi-filter"></span>
+    </button>
+  </form>
+</nav>

@@ -12,6 +12,7 @@ import {
 } from '@angular/router';
 import {
   Observable,
+  catchError,
   concat,
   concatMap,
   map,
@@ -44,14 +45,24 @@ export class HomePageResolver
         const category = route.params['category'];
 
         if (subcategory && category) {
-          return this.productsService.getProductsByCategoryAndSubcategory(
-            category,
-            subcategory
-          );
+          return this.productsService
+            .getProductsByCategoryAndSubcategory(
+              category,
+              subcategory
+            )
+            .pipe(
+              catchError((err, caught) =>
+                err ? of([]) : caught
+              )
+            );
         } else {
-          return this.productsService.getProductsByCategory(
-            category
-          );
+          return this.productsService
+            .getProductsByCategory(category)
+            .pipe(
+              catchError((err, caught) =>
+                err ? of([]) : caught
+              )
+            );
         }
       })
     );

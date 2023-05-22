@@ -7,7 +7,6 @@ import { By } from '@angular/platform-browser';
 
 import { ProductCardComponent } from './product-card.component';
 import { mockedProducts } from 'src/app/mocks';
-import { LogoComponent } from '../logo/logo.component';
 
 describe('ProductCardComponent', () => {
   let component: ProductCardComponent;
@@ -62,7 +61,7 @@ describe('ProductCardComponent', () => {
 
       expect(divCard).toBeTruthy();
       expect(divCard.className).toEqual(
-        'card maxWidth shadow-sm'
+        'card shadow-sm maxWidth'
       );
     });
 
@@ -91,8 +90,6 @@ describe('ProductCardComponent', () => {
     it("Should displayed card's body", () => {
       fixture.detectChanges();
 
-      const mockedProductValueArray =
-        Object.values(mockedProducts[0]);
       const cardBody = fixture.debugElement.query(
         By.css('div.card-body')
       ).nativeElement as HTMLDivElement;

@@ -8,8 +8,16 @@
   <div class="col-3">
     <app-filtering-menu></app-filtering-menu>
   </div>
-  <div class="col-9">
-    <p>{{ products$ | async | json }}</p>
+  <div class="col-9 d-flex flex-column gap-3">
+    <ng-container
+      *ngFor="let item of products$ | async"
+    >
+      <app-product-card
+        [item]="item"
+        [descriptionLength]="80"
+        [width]="'w-100'"
+      ></app-product-card>
+    </ng-container>
   </div>
 </section>
 

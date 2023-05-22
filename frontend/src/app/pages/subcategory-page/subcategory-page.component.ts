@@ -36,11 +36,11 @@ export class SubcategoryPageComponent
   ngOnInit(): void {
     this.productsStream$ =
       this.activatedRouteService.data.pipe(
-        map(({ products }) =>
-          (products['data'] as Product[]).length
+        map(({ products }) => {
+          return products['data']
             ? products['data']
-            : null
-        )
+            : null;
+        })
       );
   }
 }

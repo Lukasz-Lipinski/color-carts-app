@@ -65,6 +65,7 @@ router.get<
         data: products,
       })
     : res.status(404).json({
+        data: [],
         error: {
           msg: 'Not found',
         },
@@ -92,6 +93,7 @@ router.get<
         data: products,
       })
     : res.status(404).json({
+        data: [],
         error: {
           msg: 'Not found',
         },

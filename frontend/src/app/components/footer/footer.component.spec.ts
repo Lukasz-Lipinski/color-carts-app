@@ -89,7 +89,7 @@ describe('Testing Footer Component', () => {
         By.css('footer')
       ).nativeElement as HTMLElement;
       const classes =
-        'd-flex justify-content-between p-4';
+        'd-flex justify-content-between p-4 pt-2 bg-light';
       expect(footer.className).toEqual(classes);
     });
 

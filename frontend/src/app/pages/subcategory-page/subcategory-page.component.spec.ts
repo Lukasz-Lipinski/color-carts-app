@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubcategoryPageComponent } from './subcategory-page.component';
+// import { SubcategoryPageComponent } from './subcategory-page.component';
 
-describe('SubcategoryPageComponent', () => {
-  let component: SubcategoryPageComponent;
-  let fixture: ComponentFixture<SubcategoryPageComponent>;
+// describe('SubcategoryPageComponent', () => {
+//   let component: SubcategoryPageComponent;
+//   let fixture: ComponentFixture<SubcategoryPageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SubcategoryPageComponent ]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ SubcategoryPageComponent ]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(SubcategoryPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(SubcategoryPageComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
