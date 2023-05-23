@@ -1,0 +1,13 @@
+<ng-container *ngIf="isShown">
+  <div class="toast show">
+    <div class="toast-header">
+      <button
+        class="btn-close"
+        (click)="onClose()"
+      ></button>
+    </div>
+    <div class="toast-body">
+      {{ description }}
+    </div>
+  </div>
+</ng-container>

@@ -6,7 +6,9 @@
   <app-login-form
     class="col-6"
     (submitEmitter)="onLoginUser($event)"
-  ></app-login-form>
+    [isSpinner]="getSpinner.isLoading"
+  >
+  </app-login-form>
   <div class="col-6">
     <div>
       <h3 class="h3 text-center">Sign up</h3>
@@ -33,3 +35,7 @@
     </div>
   </div>
 </div>
+
+<app-toast
+  [description]="getSpinner.errorRes"
+></app-toast>

@@ -54,14 +54,14 @@ export class FilteringMenuComponent
 
   ngOnInit(): void {
     this.menuForm = new FormGroup({
-      minPrice: new FormControl('', {
+      minPrice: new FormControl('0', {
         nonNullable: true,
         validators: [
           checkIfNumber,
           Validators.min(0),
         ],
       }),
-      maxPrice: new FormControl('', {
+      maxPrice: new FormControl('0', {
         nonNullable: true,
         validators: [
           checkIfNumber,
@@ -69,6 +69,11 @@ export class FilteringMenuComponent
         ],
       }),
     });
+  }
+
+  onClearFilter() {
+    this.menuForm.reset();
+    this.filterEmitter.emit();
   }
 
   onFilterElement() {
@@ -81,5 +86,20 @@ export class FilteringMenuComponent
     };
 
     this.filterEmitter.emit(filterDetails);
+  }
+
+  checkIfMinPriceIsGreater() {
+    return (
+      this.getMenuForm.controls['maxPrice']
+        .value <=
+      this.getMenuForm.controls['minPrice'].value
+    );
+  }
+
+  public get isDisabled() {
+    return (
+      this.checkIfMinPriceIsGreater() &&
+      this.menuForm.invalid
+    );
   }
 }

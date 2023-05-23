@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -49,6 +50,7 @@ export class LoginFormComponent
       type: 'password',
     },
   ];
+  @Input() isSpinner = false;
   @Output() submitEmitter =
     new EventEmitter<Credentials>();
 

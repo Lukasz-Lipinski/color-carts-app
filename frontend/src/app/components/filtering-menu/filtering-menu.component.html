@@ -26,9 +26,26 @@
       />
     </div>
 
-    <button class="btn btn-outline-success">
+    <button
+      class="btn"
+      [ngClass]="
+        isDisabled
+          ? 'btn-outline-danger'
+          : 'btn-outline-success'
+      "
+      [disabled]="isDisabled"
+    >
       FILTER
       <span class="bi bi-filter"></span>
     </button>
+
+    <ng-container *ngIf="!isDisabled">
+      <button
+        (click)="onClearFilter()"
+        class="btn btn-outline-danger"
+      >
+        Clear filter &cross;
+      </button>
+    </ng-container>
   </form>
 </nav>

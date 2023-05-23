@@ -20,6 +20,7 @@ import { ProductCardComponent } from '../components/product-card/product-card.co
 import { PageTitleComponent } from '../components/page-title/page-title.component';
 import { InfoShopPartComponent } from '../components/info-shop-part/info-shop-part.component';
 import { FilteringMenuComponent } from '../components/filtering-menu/filtering-menu.component';
+import { ToastComponent } from '../components/toast/toast.component';
 
 export const components = [
   FilteringMenuComponent,
@@ -39,6 +40,7 @@ export const components = [
   ProductCardComponent,
   PageTitleComponent,
   InfoShopPartComponent,
+  ToastComponent,
 ];
 
 @NgModule({

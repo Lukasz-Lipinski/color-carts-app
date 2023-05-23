@@ -81,6 +81,31 @@ describe('Testing Filtering Menu Component', () => {
       );
     });
 
+    it('Should displayed 2 divs with the same classes including input and paragraph', () => {
+      const divs = fixture.debugElement.queryAll(
+        By.css('div')
+      );
+
+      expect(divs.length).toEqual(2);
+      for (let element of divs) {
+        const div =
+          element.nativeElement as HTMLDivElement;
+        const divStyles = 'py-2';
+        const p = div.querySelector('p');
+        const pClasses = 'text-center fw-bold';
+        const input = div.querySelector('input');
+        const inputClasses = 'form-control';
+
+        expect(div.className).toEqual(divStyles);
+        expect(p).toBeTruthy();
+        expect(p?.className).toEqual(pClasses);
+        expect(input).toBeTruthy();
+        expect(input?.className).toEqual(
+          inputClasses
+        );
+      }
+    });
+
     it('Should displayed button', () => {
       const btn = fixture.debugElement.query(
         By.css('button')

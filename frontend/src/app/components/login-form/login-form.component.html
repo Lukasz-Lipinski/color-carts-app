@@ -25,6 +25,7 @@
     ></app-error-message>
   </div>
   <button
+    *ngIf="!isSpinner; else Spinner"
     type="submit"
     class="btn btn-lg mt-4 py-2 px-5 w-50"
     [ngClass]="
@@ -37,3 +38,7 @@
     Login
   </button>
 </form>
+
+<ng-template #Spinner>
+  <span class="spinner-grow text-primary"></span>
+</ng-template>

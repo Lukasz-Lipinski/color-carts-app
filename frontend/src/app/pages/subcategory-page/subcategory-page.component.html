@@ -6,7 +6,9 @@
   "
 >
   <div class="col-3">
-    <app-filtering-menu></app-filtering-menu>
+    <app-filtering-menu
+    (filterEmitter)="onSetFilter($event)"
+    ></app-filtering-menu>
   </div>
   <div class="col-9 d-flex flex-column gap-3">
     <ng-container
