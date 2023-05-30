@@ -61,6 +61,7 @@
     class="d-flex flex-column align-items-stretch"
   >
     <button
+      *ngIf="!loadingState; else Spinner"
       type="submit"
       class="btn btn-outline-primary btn-lg mt-4"
       [ngClass]="
@@ -74,3 +75,9 @@
     </button>
   </div>
 </form>
+
+<ng-template #Spinner>
+  <span class="spinner-border text-primary">
+    <span class="visible"></span>
+  </span>
+</ng-template>

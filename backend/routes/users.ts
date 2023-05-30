@@ -55,11 +55,7 @@ router.post<
   } else {
     await addNewUser(req.body);
 
-    return res.status(200).json({
-      error: {
-        msg: 'An account created successfully',
-      },
-    });
+    return res.status(200).json();
   }
 });
 

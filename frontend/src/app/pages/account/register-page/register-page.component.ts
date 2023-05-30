@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { AuthService } from 'src/app/components/auth/auth.service';
 import { ButtonLink } from 'src/app/components/button-link/button-link.component';
 import { Credentials } from 'src/app/components/login-form/login-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ISpinner } from '../login-page/login-page.component';
 
 @Component({
   selector: 'app-register-page',
@@ -19,19 +24,49 @@ export class RegisterPageComponent
     href: '',
     isFullRow: true,
   };
-  directive: any; // here will be toast directive but firstly must be created
+  private spinner: ISpinner = {
+    errorRes: '',
+    title: '',
+    isLoading: false,
+    isError: false,
+  };
+  public get getSpinner(): ISpinner {
+    return this.spinner;
+  }
+
   constructor(
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {}
 
   onRegisterUser(userCredentials: Credentials) {
+    this.spinner = {
+      ...this.spinner,
+      isLoading: true,
+    };
+
     this.authService
       .register(userCredentials)
       .subscribe({
-        next: (res) =>
-          (this.directive = res.data),
+        next: (res) => {
+          if (res.error) {
+            this.spinner = {
+              isLoading: false,
+              isError: true,
+              errorRes: (res as any).error.error
+                .msg,
+            };
+          }
+          this.cdr.markForCheck();
+        },
       });
+  }
+  onCloseToast() {
+    this.spinner = {
+      ...this.spinner,
+      isError: false,
+    };
   }
 }

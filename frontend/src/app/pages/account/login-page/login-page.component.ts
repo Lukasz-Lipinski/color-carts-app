@@ -4,6 +4,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/components/auth/auth.service';
 import { ButtonLink } from 'src/app/components/button-link/button-link.component';
 import { Credentials } from 'src/app/components/login-form/login-form.component';
@@ -13,6 +14,7 @@ export interface ISpinner {
   isLoading: boolean;
   isError: boolean;
   errorRes?: string;
+  title?: string;
 }
 
 @Component({
@@ -36,11 +38,11 @@ export class LoginPageComponent
     isLoading: false,
     isError: false,
     errorRes: '',
+    title: '',
   };
   public get getSpinner() {
     return this.spinner;
   }
-
   readonly benefits = [
     'Order status overview',
     'Order history overview',
@@ -49,7 +51,8 @@ export class LoginPageComponent
   ];
   constructor(
     private readonly authService: AuthService,
-    private changeDetectorRef: ChangeDetectorRef
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -68,16 +71,22 @@ export class LoginPageComponent
         };
         this.changeDetectorRef.detectChanges();
       },
-      error: (err: {
-        error: { msg: string };
-      }) => {
+      error: ({ error, statusText }) => {
         this.spinner = {
           isLoading: false,
           isError: true,
-          errorRes: err.error.msg,
+          errorRes: error.error.msg,
+          title: statusText,
         };
         this.changeDetectorRef.detectChanges();
       },
     });
+  }
+
+  onCloseToast() {
+    this.spinner = {
+      ...this.spinner,
+      isError: false,
+    };
   }
 }

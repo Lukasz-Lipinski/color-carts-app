@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -91,6 +92,7 @@ export class RegisterFormComponent
   registerForm!: FormGroup<RegisterForm>;
   @Output() emitDataForRegister =
     new EventEmitter<Credentials>();
+  @Input() loadingState: boolean = false;
 
   constructor() {}
 

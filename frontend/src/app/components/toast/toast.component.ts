@@ -1,7 +1,10 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -12,15 +15,29 @@ import {
   styleUrls: ['./toast.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToastComponent implements OnInit {
+export class ToastComponent
+  implements OnInit, OnDestroy
+{
   @Input() description?: string;
-  @Input() isShown: boolean = true;
+  @Input() title?: string;
+  @Output() closeEmitter =
+    new EventEmitter<void>();
+
+  private timer!: NodeJS.Timeout;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.timer = setTimeout(() => {
+      this.onClose();
+    }, 3000);
+  }
 
   onClose() {
-    this.isShown = false;
+    this.closeEmitter.emit();
+  }
+
+  ngOnDestroy() {
+    clearTimeout(this.timer);
   }
 }

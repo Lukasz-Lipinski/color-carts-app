@@ -1,14 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import {
-  Injectable,
-  isDevMode,
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   Observable,
   catchError,
+  map,
   of,
-  throwError,
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Credentials } from '../login-form/login-form.component';
@@ -88,6 +85,13 @@ export class AuthService {
       name: '',
       surname: '',
       isLogged: false,
+    });
+  }
+
+  private setUserData(data: User) {
+    this.user.next({
+      ...data,
+      isLogged: true,
     });
   }
 }

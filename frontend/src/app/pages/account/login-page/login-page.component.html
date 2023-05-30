@@ -36,6 +36,10 @@
   </div>
 </div>
 
-<app-toast
-  [description]="getSpinner.errorRes"
-></app-toast>
+<ng-container *ngIf="getSpinner.isError">
+  <app-toast
+    [description]="getSpinner.errorRes"
+    [title]="getSpinner.title"
+    (closeEmitter)="onCloseToast()"
+  ></app-toast>
+</ng-container>

@@ -4,5 +4,14 @@
   ></app-button-link>
   <app-register-form
     (emitDataForRegister)="onRegisterUser($event)"
+    [loadingState]="getSpinner.isLoading"
   ></app-register-form>
 </section>
+
+<ng-container *ngIf="getSpinner.isError">
+  <app-toast
+    (closeEmitter)="onCloseToast()"
+    [description]="getSpinner.errorRes"
+    [title]="getSpinner.title"
+  ></app-toast>
+</ng-container>
