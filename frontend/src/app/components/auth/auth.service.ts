@@ -11,10 +11,11 @@ import { environment } from 'src/environments/environment';
 import { Credentials } from '../login-form/login-form.component';
 
 export interface User {
-  name: string;
-  surname: string;
+  name?: string;
+  surname?: string;
   email: string;
   isLogged: boolean;
+  id?: string;
   address?: {
     city: string;
     postcode: string;
@@ -39,9 +40,8 @@ export class AuthService {
   private readonly url = environment.BACKEND_API;
 
   user = new BehaviorSubject<User>({
-    name: '',
-    surname: '',
     email: '',
+    id: '',
     isLogged: false,
   });
 
@@ -60,6 +60,12 @@ export class AuthService {
       .pipe(
         catchError((res) => {
           return of(res);
+        }),
+        map((data) => {
+          if ('data' in data) {
+            this.setUserData(data.data);
+          }
+          return data;
         })
       );
   }
@@ -75,6 +81,12 @@ export class AuthService {
       .pipe(
         catchError((res) => {
           throw res;
+        }),
+        map((data) => {
+          if ('data' in data) {
+            this.setUserData(data.data!);
+          }
+          return data;
         })
       );
   }

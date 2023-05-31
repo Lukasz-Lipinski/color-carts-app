@@ -138,7 +138,10 @@ describe('Testing Login Form Component', () => {
     });
 
     it('Should rendered button and disabled it if form is invalid', () => {
-      let button = fixture.debugElement.query(
+      component.isSpinner = false;
+      fixture.detectChanges();
+
+      const button = fixture.debugElement.query(
         By.css('button')
       ).nativeElement as HTMLButtonElement;
 

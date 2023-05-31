@@ -3,6 +3,8 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-top-navigation',
@@ -13,7 +15,14 @@ import {
 export class TopNavigationComponent
   implements OnInit
 {
-  constructor() {}
+  private cred$!: Observable<any>;
+  public get getCred$() {
+    return this.cred$;
+  }
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.cred$ = this.authService.user;
+  }
 }

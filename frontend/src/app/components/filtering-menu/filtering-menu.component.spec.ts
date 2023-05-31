@@ -110,7 +110,7 @@ describe('Testing Filtering Menu Component', () => {
       const btn = fixture.debugElement.query(
         By.css('button')
       ).nativeElement as HTMLButtonElement;
-      const classes = 'btn btn-outline-success';
+      const classes = 'btn btn-outline-danger';
 
       expect(btn).toBeTruthy();
       expect(btn.className).toEqual(classes);

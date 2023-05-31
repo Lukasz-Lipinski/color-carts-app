@@ -33,6 +33,11 @@ export class RegisterPageComponent
   public get getSpinner(): ISpinner {
     return this.spinner;
   }
+  public set setSpinner(spinner: ISpinner) {
+    this.spinner = {
+      ...spinner,
+    };
+  }
 
   constructor(
     private readonly authService: AuthService,
@@ -42,31 +47,49 @@ export class RegisterPageComponent
   ngOnInit(): void {}
 
   onRegisterUser(userCredentials: Credentials) {
-    this.spinner = {
-      ...this.spinner,
-      isLoading: true,
-    };
+    this.switchOnOnLoading();
 
     this.authService
       .register(userCredentials)
       .subscribe({
         next: (res) => {
-          if (res.error) {
-            this.spinner = {
-              isLoading: false,
-              isError: true,
-              errorRes: (res as any).error.error
-                .msg,
-            };
-          }
+          this.setSpinnerData(
+            res.error as { msg: string }
+          );
           this.cdr.markForCheck();
         },
       });
   }
+
   onCloseToast() {
     this.spinner = {
       ...this.spinner,
       isError: false,
     };
+  }
+
+  private switchOnOnLoading(error?: {
+    msg: string;
+  }) {
+    this.spinner = {
+      ...this.spinner,
+      isLoading: true,
+    };
+  }
+
+  private setSpinnerData(error: { msg: string }) {
+    if (error) {
+      this.spinner = {
+        isLoading: false,
+        isError: error ? true : false,
+        errorRes: error ? error.msg : undefined,
+      };
+    } else {
+      this.spinner = {
+        ...this.spinner,
+        isError: false,
+        isLoading: false,
+      };
+    }
   }
 }

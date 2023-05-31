@@ -11,18 +11,21 @@ import {
 import { AuthService } from 'src/app/components/auth/auth.service';
 import {
   mockedResponse,
+  mockedUrl,
   mockedUserCredentials,
 } from 'src/app/mocks';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { ButtonLinkComponent } from 'src/app/components/button-link/button-link.component';
 import { RegisterFormComponent } from 'src/app/components/register-form/register-form.component';
+import { environment } from 'src/environments/environment';
 
 describe('Testing Register Page Component', () => {
   let fixture: ComponentFixture<RegisterPageComponent>;
   let component: RegisterPageComponent;
   let controller: HttpTestingController;
   let authService: AuthService;
+  let timer: NodeJS.Timeout;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,6 +51,7 @@ describe('Testing Register Page Component', () => {
     controller = TestBed.inject(
       HttpTestingController
     );
+    authService = TestBed.inject(AuthService);
 
     component.ngOnInit();
   });
@@ -59,15 +63,20 @@ describe('Testing Register Page Component', () => {
       ).toBeTruthy();
     });
 
-    it('Should sent user credentials to backend and got an response', (dn: DoneFn) => {
-      component.onRegisterUser(
-        mockedUserCredentials
-      );
-      dn();
+    it('Should close spinner', () => {
+      component.setSpinner = {
+        ...component.getSpinner,
+        isError: true,
+      };
 
-      expect(component.directive).toBe(
-        mockedResponse.data
-      );
+      expect(
+        component.getSpinner.isError
+      ).toBeTrue();
+
+      component.onCloseToast();
+      expect(
+        component.getSpinner.isError
+      ).toBeFalse();
     });
   });
 

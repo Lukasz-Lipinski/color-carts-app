@@ -8,6 +8,8 @@ import { By } from '@angular/platform-browser';
 import { InformationBarComponent } from './information-bar/information-bar.component';
 import { MiddlePartComponent } from './middle-part/middle-part.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('Testing Top Navigation Component', () => {
   let fixture: ComponentFixture<TopNavigationComponent>;
@@ -21,6 +23,7 @@ describe('Testing Top Navigation Component', () => {
         MiddlePartComponent,
         NavigationComponent,
       ],
+      imports: [HttpClientTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 

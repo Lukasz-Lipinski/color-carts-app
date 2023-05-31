@@ -16,6 +16,9 @@ import {
   RegisterForm,
 } from '../components/register-form/register-form.component';
 
+export const mockedUrl =
+  'http://localhost:5000/api';
+
 export const mockedProducts: Product[] = [
   {
     _id: 'id-1',
