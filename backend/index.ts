@@ -7,7 +7,7 @@ import bodyparser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import ProductRoutes from './routes/products';
-import UserRoutes from './routes/users';
+import UsersRoutes from './routes/users';
 
 const app = express();
 const port = process.env.PORT || '5000';
@@ -28,7 +28,7 @@ app.use(
 );
 
 app.use('/api/products', ProductRoutes);
-app.use('/api/users', UserRoutes);
+app.use('/api/users', UsersRoutes);
 
 app.get(
   '/api/test',

@@ -1,4 +1,4 @@
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 import { MongoClient, ObjectId } from 'mongodb';
 
 export interface Product {
@@ -24,6 +24,7 @@ export interface User {
   name: string;
   surname: string;
   email: string;
+  id: string;
   password: string;
   address?: {
     city: string;
@@ -31,15 +32,6 @@ export interface User {
     street: string;
     flatNo: number;
   };
-}
-
-export interface FrontendError {
-  msg: string;
-}
-
-export interface FrontendResponse<T> {
-  data?: T;
-  error?: FrontendError;
 }
 
 const salt = 10;
@@ -57,11 +49,11 @@ export async function connectToDB() {
 
 //comparing passwords
 export async function comparePasswords(
-  userPassword: string,
+  passwordToCompare: string,
   hashedPassword: string
 ) {
-  return (
-    (await hash(userPassword, salt)) ===
+  return await compare(
+    passwordToCompare,
     hashedPassword
   );
 }
@@ -92,9 +84,15 @@ export async function addNewUser(
   const client = (await connectToDB()).collection(
     'users'
   );
-  client.insertOne({
-    _id: new ObjectId(),
+
+  const newUser: Credentials = {
     ...user,
+    password: await hash(user.password, salt),
+  };
+
+  client.insertOne({
+    id: new ObjectId().toString(),
+    ...newUser,
   });
 }
 
@@ -105,19 +103,29 @@ export async function findUser({
 }: Credentials): Promise<User | null> {
   const client = await connectToDB();
 
-  return (
-    ((
-      await client
-        .collection<User>('users')
-        .find()
-        .toArray()
-    ).find(
-      async (user) =>
-        user.email === email &&
-        (await comparePasswords(
-          password,
-          user.password
-        ))
-    ) as User) || null
+  if (!email || !password) return null;
+
+  const allUsers = await client
+    .collection<User>('users')
+    .find()
+    .toArray();
+
+  const user = allUsers.find(
+    (u) => u.email === email
   );
+
+  if (!user) return null;
+
+  console.log(
+    'inner fun',
+    user.password,
+    password
+  );
+
+  return (await comparePasswords(
+    password,
+    user!.password
+  ))
+    ? user
+    : null;
 }

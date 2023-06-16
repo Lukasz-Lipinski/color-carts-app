@@ -4,11 +4,12 @@ import express, {
 } from 'express';
 import {
   Credentials,
-  FrontendResponse,
   User,
   addNewUser,
   findUser,
 } from '../services';
+import { GetUserDto } from '../Dto/User/UserDto';
+import { ResponseService } from '../services/ResponseService';
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.get('/', (req: Request, res: Response) => {
 router.post<
   any,
   any,
-  FrontendResponse<User>,
+  ResponseService<User>,
   Credentials
 >('/login', async (req, res) => {
   const foundUser = await findUser(req.body);
@@ -31,31 +32,39 @@ router.post<
 
   !foundUser &&
     res.status(404).json({
-      error: { msg: "User doesn't exsist" },
+      msg: "User doesn't exsist",
     });
 });
 
 router.post<
   any,
   any,
-  FrontendResponse<User>,
+  ResponseService<GetUserDto>,
   Credentials
 >('/register', async (req, res) => {
   const user = await findUser(req.body);
 
   if (user) {
-    return res
-      .type('json')
-      .status(409)
-      .json({
-        error: {
-          msg: 'User already exsists',
-        },
-      });
+    return res.type('json').status(409).json({
+      msg: 'User already exsists',
+    });
   } else {
     await addNewUser(req.body);
+    let responseUser: GetUserDto;
+    const newUser = await findUser(req.body);
 
-    return res.status(200).json();
+    console.log('added user', newUser);
+
+    if (newUser) {
+      responseUser = {
+        ...newUser,
+        surname: '',
+      };
+    }
+
+    return res.status(200).json({
+      data: newUser,
+    });
   }
 });
 

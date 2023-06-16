@@ -3,11 +3,11 @@ import express, {
   Response,
 } from 'express';
 import {
-  FrontendResponse,
   Product,
   getAllProducts,
   getProductsByCategory,
 } from '../services';
+import { ResponseService } from '../services/ResponseService';
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ router.get(
 router.get<
   any,
   any,
-  FrontendResponse<Product[]>,
+  ResponseService<Product[]>,
   any
 >('/bestsellers', async (req, res) => {
   const products = (await getAllProducts()).slice(
@@ -43,16 +43,14 @@ router.get<
 
   !products &&
     res.status(404).json({
-      error: {
-        msg: 'Not found',
-      },
+      msg: 'Products not available!',
     });
 });
 
 router.get<
   any,
   any,
-  FrontendResponse<Product[]>,
+  ResponseService<Product[]>,
   any
 >('/:category', async (req, res) => {
   const { category } = req.params;
@@ -65,17 +63,14 @@ router.get<
         data: products,
       })
     : res.status(404).json({
-        data: [],
-        error: {
-          msg: 'Not found',
-        },
+        msg: 'Not found',
       });
 });
 
 router.get<
   any,
   any,
-  FrontendResponse<Product[]>,
+  ResponseService<Product[]>,
   any
 >('/:category/:subcategory', async (req, res) => {
   const { category, subcategory } = req.params;
@@ -93,10 +88,7 @@ router.get<
         data: products,
       })
     : res.status(404).json({
-        data: [],
-        error: {
-          msg: 'Not found',
-        },
+        msg: 'Not found',
       });
 });
 
