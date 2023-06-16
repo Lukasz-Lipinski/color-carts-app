@@ -24,8 +24,8 @@ export interface Product {
   providedIn: 'root',
 })
 export class CartService {
-  products$: Observable<Product[]> =
-    new BehaviorSubject<Product[]>([]);
+  private products: Product[] = [];
+  products$ = new BehaviorSubject<Product[]>([]);
 
   constructor() {}
 
@@ -42,5 +42,32 @@ export class CartService {
           : 80
       )
     );
+  }
+  addProductToCart(product: Product) {
+    const index = this.products.findIndex(
+      (p) => p.id === product.id
+    );
+
+    if (this.checkIfProductExsists(product)) {
+      this.products[index].amount += 1;
+    } else {
+      this.products.push(product);
+    }
+
+    this.products$.next(this.products);
+  }
+  RemoveProductFromCart(product: Product) {
+    if (this.checkIfProductExsists(product)) {
+      this.products = this.products.filter(
+        (p) => p.id !== product.id
+      );
+      this.products$.next(this.products);
+    }
+  }
+
+  private checkIfProductExsists({
+    id,
+  }: Product): Product | undefined {
+    return this.products.find((p) => p.id === id);
   }
 }

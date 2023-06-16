@@ -21,6 +21,7 @@ import { PageTitleComponent } from '../components/page-title/page-title.componen
 import { InfoShopPartComponent } from '../components/info-shop-part/info-shop-part.component';
 import { FilteringMenuComponent } from '../components/filtering-menu/filtering-menu.component';
 import { ToastComponent } from '../components/toast/toast.component';
+import { CartIconComponent } from '../components/cart-icon/cart-icon.component';
 
 export const components = [
   FilteringMenuComponent,
@@ -41,6 +42,7 @@ export const components = [
   PageTitleComponent,
   InfoShopPartComponent,
   ToastComponent,
+  CartIconComponent,
 ];
 
 @NgModule({

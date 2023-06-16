@@ -16,10 +16,25 @@
     </a>
     <a
       routerLink="cart"
-      class="d-flex flex-column align-items-center custom-link link-dark"
+      class="link-dark custom-link"
     >
-      <span class="fs-4 bi bi-cart"></span>
-      <span>Cart</span>
+      <app-cart-icon
+        [productsAmount]="
+          (productsAmount$ | async)!
+        "
+      ></app-cart-icon>
     </a>
+    <ng-container *ngIf="isLogged$ | async">
+      <a
+        class="link-danger d-flex flex-column align-items-center"
+        routerLink="/"
+        (click)="onLogout()"
+      >
+        <span
+          class="bi bi-box-arrow-down fs-4"
+        ></span>
+        <span>Logout</span>
+      </a>
+    </ng-container>
   </div>
 </section>

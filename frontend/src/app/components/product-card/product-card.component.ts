@@ -23,23 +23,55 @@ export class ProductCardComponent
   @Input() item!: Product;
   @Input() width?: widthOpiton = 'maxWidth';
   @Input() descriptionLength: number = 25;
+  private description!: {
+    value: string;
+    isHidden: boolean;
+  };
+  get getDescription() {
+    return this.description;
+  }
 
-  public setDescription(): string {
+  setDescription() {
     if (
       this.item.description.length <
       this.descriptionLength
     )
-      return this.item.description;
+      this.description = {
+        value: this.item.description,
+        isHidden: false,
+      };
     else
-      return (
-        this.item.description.substring(
-          0,
-          this.descriptionLength
-        ) + '...'
-      );
+      this.description = {
+        value:
+          this.item.description.substring(
+            0,
+            this.descriptionLength
+          ) + '...',
+        isHidden: true,
+      };
   }
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setDescription();
+  }
+
+  showRoller() {
+    return (
+      this.item.description.length >
+      this.descriptionLength
+    );
+  }
+
+  onRolloutRollinDetails() {
+    if (this.description.isHidden) {
+      this.description = {
+        value: this.item.description,
+        isHidden: false,
+      };
+    } else {
+      this.setDescription();
+    }
+  }
 }
